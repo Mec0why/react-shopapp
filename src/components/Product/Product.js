@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import Button from '../Button/Button';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+// import shortid from 'shortid';
 
 const Product = (props) => {
   const [currentColor, setCurrentColor] = useState(props.colors[0]);
@@ -15,6 +16,27 @@ const Product = (props) => {
   const getPrice = () => {
     let variantPrice = props.basePrice + currentSize.additionalPrice;
     return variantPrice;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    prepareOrder();
+    console.log(prepareOrder());
+    console.log('Summary');
+    console.log('===============');
+    console.log('Name: ', props.title);
+    console.log('Price: ', currentSize.name);
+    console.log('Size: ', getPrice());
+    console.log('Color: ', currentColor);
+  };
+
+  const prepareOrder = () => {
+    return {
+      title: props.title,
+      price: getPrice(),
+      color: currentColor,
+      size: currentSize.name,
+    };
   };
 
   return (
@@ -31,7 +53,7 @@ const Product = (props) => {
           <h2 className={styles.name}>{props.title}</h2>
           <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className={styles.sizes}>
             <h3 className={styles.optionLabel}>Sizes</h3>
             <ul className={styles.choices}>

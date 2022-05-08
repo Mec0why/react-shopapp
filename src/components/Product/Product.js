@@ -8,6 +8,15 @@ const Product = (props) => {
   const [currentColor, setCurrentColor] = useState(props.colors[0]);
   const [currentSize, setCurrentSize] = useState(props.sizes[0]);
 
+  const prepareColorClassName = (color) => {
+    return styles[`color${color.charAt(0).toUpperCase() + color.slice(1)}`];
+  };
+
+  const getPrice = () => {
+    let variantPrice = props.basePrice + currentSize.additionalPrice;
+    return variantPrice;
+  };
+
   return (
     <article className={styles.product}>
       <div className={styles.imageContainer}>
@@ -20,7 +29,7 @@ const Product = (props) => {
       <div>
         <header>
           <h2 className={styles.name}>{props.title}</h2>
-          <span className={styles.price}>Price: {props.basePrice}$</span>
+          <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
         <form>
           <div className={styles.sizes}>
@@ -47,12 +56,9 @@ const Product = (props) => {
                   <button
                     type='button'
                     onClick={() => setCurrentColor(color)}
-                    className={clsx(
-                      styles[
-                        `color${color.charAt(0).toUpperCase() + color.slice(1)}`
-                      ],
-                      { [styles.active]: currentColor === color }
-                    )}
+                    className={clsx(prepareColorClassName(color), {
+                      [styles.active]: currentColor === color,
+                    })}
                   ></button>
                 </li>
               ))}

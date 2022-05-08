@@ -1,22 +1,22 @@
 import styles from './Product.module.scss';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import ProductImage from '../ProductImage/ProductImage';
 import ProductForm from '../ProductForm/ProductForm';
 
 const Product = (props) => {
   const [currentColor, setCurrentColor] = useState(props.colors[0]);
   const [currentSize, setCurrentSize] = useState(props.sizes[0]);
+  const [currentPrice, setCurrentPrice] = useState(props.basePrice);
 
-  const getPrice = () => {
-    let variantPrice = props.basePrice + currentSize.additionalPrice;
-    return variantPrice;
-  };
+  useMemo(() => {
+    return setCurrentPrice(props.basePrice + currentSize.additionalPrice);
+  }, [props.basePrice, currentSize.additionalPrice]);
 
   const prepareOrder = () => {
     return {
       title: props.title,
-      price: getPrice(),
+      price: currentPrice,
       color: currentColor,
       size: currentSize.name,
     };
@@ -35,7 +35,8 @@ const Product = (props) => {
         setCurrentColor={setCurrentColor}
         setCurrentSize={setCurrentSize}
         prepareOrder={prepareOrder}
-        getPrice={getPrice}
+        currentPrice={currentPrice}
+        setCurrentPrice={setCurrentPrice}
       />
     </article>
   );

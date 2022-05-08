@@ -13,7 +13,7 @@ const ProductForm = (props) => {
     console.log('===============');
     console.log('Name: ', props.title);
     console.log('Price: ', props.currentSize.name);
-    console.log('Size: ', props.getPrice());
+    console.log('Size: ', props.currentPrice);
     console.log('Color: ', props.currentColor);
   };
 
@@ -21,7 +21,7 @@ const ProductForm = (props) => {
     <div>
       <header>
         <h2 className={styles.name}>{props.title}</h2>
-        <span className={styles.price}>Price: {props.getPrice()}$</span>
+        <span className={styles.price}>Price: {props.currentPrice}$</span>
       </header>
       <form onSubmit={handleSubmit}>
         <OptionSize
@@ -51,8 +51,9 @@ ProductForm.propTypes = {
   basePrice: PropTypes.number.isRequired,
   currentColor: PropTypes.string.isRequired,
   currentSize: PropTypes.object.isRequired,
+  currentPrice: PropTypes.number.isRequired,
   setCurrentColor: PropTypes.func.isRequired,
   setCurrentSize: PropTypes.func.isRequired,
+  setCurrentPrice: PropTypes.func.isRequired,
   prepareOrder: PropTypes.func.isRequired,
-  getPrice: PropTypes.func.isRequired,
 };

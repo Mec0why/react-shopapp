@@ -2,12 +2,9 @@ import styles from './ProductForm.module.scss';
 import clsx from 'clsx';
 import Button from '../Button/Button';
 import PropTypes from 'prop-types';
+import OptionColor from '../OptionColor/OptionColor';
 
 const ProductForm = (props) => {
-  const prepareColorClassName = (color) => {
-    return styles[`color${color.charAt(0).toUpperCase() + color.slice(1)}`];
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     props.prepareOrder();
@@ -45,22 +42,11 @@ const ProductForm = (props) => {
             ))}
           </ul>
         </div>
-        <div className={styles.colors}>
-          <h3 className={styles.optionLabel}>Colors</h3>
-          <ul className={styles.choices}>
-            {props.colors.map((color) => (
-              <li key={color}>
-                <button
-                  type='button'
-                  onClick={() => props.setCurrentColor(color)}
-                  className={clsx(prepareColorClassName(color), {
-                    [styles.active]: props.currentColor === color,
-                  })}
-                ></button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <OptionColor
+          colors={props.colors}
+          currentColor={props.currentColor}
+          setCurrentColor={props.setCurrentColor}
+        />
         <Button className={styles.button}>
           <span className='fa fa-shopping-cart' />
         </Button>

@@ -32,31 +32,15 @@
         background: rgb(47, 53, 66);
       }
   
-      &.colorBlack {
-        background: #000;
-      }
-    
-      &.colorRed {
-        background: #e74c3c;
-      }
-    
-      &.colorWhite {
-        background: #fff;
-      }
-    
-      &.colorBlue {
-        background: #3498db;
-      }
-    
-      &.colorGreen {
-        background: #2ecc71;
-      }
-  
       &:first-child {
         margin-left: 0;
       }
     }
   
+  }
+  
+  .sizes .choices button:hover{
+    background: rgb(47, 53, 66);
   }
   
   .button {

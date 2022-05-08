@@ -1,8 +1,8 @@
 import styles from './ProductForm.module.scss';
-import clsx from 'clsx';
 import Button from '../Button/Button';
 import PropTypes from 'prop-types';
 import OptionColor from '../OptionColor/OptionColor';
+import OptionSize from '../OptionSize/OptionSize';
 
 const ProductForm = (props) => {
   const handleSubmit = (e) => {
@@ -24,24 +24,11 @@ const ProductForm = (props) => {
         <span className={styles.price}>Price: {props.getPrice()}$</span>
       </header>
       <form onSubmit={handleSubmit}>
-        <div className={styles.sizes}>
-          <h3 className={styles.optionLabel}>Sizes</h3>
-          <ul className={styles.choices}>
-            {props.sizes.map((size) => (
-              <li key={size.name}>
-                <button
-                  type='button'
-                  onClick={() => props.setCurrentSize(size)}
-                  className={clsx({
-                    [styles.active]: props.currentSize === size,
-                  })}
-                >
-                  {size.name}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <OptionSize
+          sizes={props.sizes}
+          currentSize={props.currentSize}
+          setCurrentSize={props.setCurrentSize}
+        />
         <OptionColor
           colors={props.colors}
           currentColor={props.currentColor}

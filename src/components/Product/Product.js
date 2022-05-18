@@ -7,10 +7,10 @@ import ProductForm from '../ProductForm/ProductForm';
 const Product = (props) => {
   const [currentColor, setCurrentColor] = useState(props.colors[0]);
   const [currentSize, setCurrentSize] = useState(props.sizes[0]);
-  const [currentPrice, setCurrentPrice] = useState(props.basePrice);
+  const [currentPrice] = useState(props.basePrice);
 
-  useMemo(() => {
-    return setCurrentPrice(props.basePrice + currentSize.additionalPrice);
+  const price = useMemo(() => {
+    return props.basePrice + currentSize.additionalPrice;
   }, [props.basePrice, currentSize.additionalPrice]);
 
   const prepareOrder = () => {
@@ -35,8 +35,7 @@ const Product = (props) => {
         setCurrentColor={setCurrentColor}
         setCurrentSize={setCurrentSize}
         prepareOrder={prepareOrder}
-        currentPrice={currentPrice}
-        setCurrentPrice={setCurrentPrice}
+        currentPrice={price}
       />
     </article>
   );

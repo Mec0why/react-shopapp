@@ -54,6 +54,5 @@ ProductForm.propTypes = {
   currentPrice: PropTypes.number.isRequired,
   setCurrentColor: PropTypes.func.isRequired,
   setCurrentSize: PropTypes.func.isRequired,
-  setCurrentPrice: PropTypes.func.isRequired,
   prepareOrder: PropTypes.func.isRequired,
 };
